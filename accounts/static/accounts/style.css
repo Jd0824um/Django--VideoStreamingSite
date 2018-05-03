@@ -1,0 +1,17 @@
+body {
+  background-color: #e6e6ff;
+  margin: auto;
+  padding: 30px;
+  text-align: center;
+  width: 50%;
+  font: bold 1em "Times New Roman", serif;
+  }
+
+div.jumbotron {
+  text-shadow: 1px 1px 2px white;
+  width: 50%;
+  margin: auto;
+  padding: 30px;
+  text-align: center;
+  font: bold 1.2em "Times New Roman", serif;
+}
