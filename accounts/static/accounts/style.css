@@ -15,3 +15,6 @@ div.jumbotron {
   text-align: center;
   font: bold 1.2em "Times New Roman", serif;
 }
+#wrapper {width: 100%; margin: auto;}
+#left { width: 50%; float: left;}
+#right { width: 50%; float: right}
