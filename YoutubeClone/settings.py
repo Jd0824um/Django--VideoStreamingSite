@@ -128,6 +128,10 @@ LOGIN_URL = '/account/login/'
 LOGIN_EXEMPT_URLS = {
     r'^account/logout/$',
     r'^account/register/$',
+    r'^account/reset_password/$',
+    r'^account/reset_password/complete/$',
+    r'^account/reset_password_done/$',
+    r'^account/reset_password/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$',
 }
 
 EMAIL_HOST = 'localhost'

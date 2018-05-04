@@ -16,7 +16,7 @@
         <p>Last Name: {{ user.last_name }} </p>
         <p>Email: {{ user.email }} </p>
         <br>
-        <button type="submit">Edit</button>
+        <a href="{% url 'accounts:edit_profile' %}">Edit</a>
     </div>
 </div>
 
