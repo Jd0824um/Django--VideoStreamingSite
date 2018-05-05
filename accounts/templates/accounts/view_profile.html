@@ -15,6 +15,12 @@
         <p>First Name: {{ user.first_name }} </p>
         <p>Last Name: {{ user.last_name }} </p>
         <p>Email: {{ user.email }} </p>
+        <p>Phone Number: {{ user.userprofile.phone }}</p>
+        <p>Description: {{ user.userprofile.description }}</p>
+        <p>City: {{ user.userprofile.phone}}</p>
+        <p>State: {{ user.userprofile.state }}</p>
+        <p>Member Since: {{ user.userprofile.created_date }}</p>
+        <img src=" {{ user.userprofile.profile_picture.url }}" width="240">
         <br>
         <button type="submit">Edit</button>
     </div>

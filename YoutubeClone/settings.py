@@ -123,6 +123,11 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
+# Static files for media (pictures, vidoes)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'YoutubeClone/media')
+MEDIA_URL = '/media/'
+
+# Login URLs
 LOGIN_REDIRECT_URL = '/account/'
 LOGIN_URL = '/account/login/'
 LOGIN_EXEMPT_URLS = {
@@ -130,5 +135,6 @@ LOGIN_EXEMPT_URLS = {
     r'^account/register/$',
 }
 
+# Email files
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025

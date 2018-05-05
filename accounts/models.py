@@ -11,6 +11,11 @@ class UserProfile(models.Model):
     city = models.CharField(max_length=20, default='')
     state = USStateField(null=True, blank=True)
     created_date = models.DateTimeField(default=timezone.now)
+    phone = models.IntegerField(default=0)
+    profile_picture = models.ImageField(upload_to='profile_image', blank=True)
+
+    def __str__(self):
+        return self.user.username
 
 # Associates the user that's being created with the user profile
 def create_profile(sender, **kwargs):
