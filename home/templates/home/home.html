@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="col-md-12">
+                <br>
+                <div class="jumbotron">
+                    <h1>Your Meme Feed</h1>
+                </div>
+                <div class="post">
+                    <form method="post">
+                        <div class="jumbotron">
+                            <p> <h1>Post a meme...</h1> </p>
+                            <br>
+                        </div>
+                        {% csrf_token %}
+                        <p> {{ form.image }} </p>
+                        <p> {{ form.post}} </p>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+            <h2 class="meme_title"> {{ text }} </h2>
+
+            {% for post in posts %}
+
+                <h1>{{ post.post }}</h1>
+                <div class="meme_post">
+                    <div class="card" style="width: 40rem;">
+                        <img class="card-img-top" src=".../100px180/?text=Image cap" alt="Card image cap">
+                        <div class="card-body">
+                        </div>
+                        <div class="card-footer text-muted">
+                            <p> By: {{ post.user.get_full_name }}</p>
+                            <p> Posted on: {{ post.created }}</p>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+        <div class="col-md-3">
+            <div class="col-md-12">
+
+                <br>
+                <div class="jumbotron">
+                    <h1>Memers</h2>
+                </div>
+                {% for user in users %}
+                {% if not user in friends %}
+                <div class="people">
+                    <h5>
+                        <a href="{% url 'accounts:view_profile_with_pk' pk=user.pk %}"> {{ user.username }} </a>
+                        <a href="{% url 'home:update_friend' operation='add' pk=user.pk %}"><button type="button" class="btn btn-success">Add Friend</button></a>
+                    </h5>
+                </div>
+
+                {% endif %}
+                {% endfor %}
+
+                <div class="jumbotron">
+                    <h1>Friends</h2>
+                </div>
+                {% for friend in friends %}
+                <a href="{% url 'accounts:view_profile_with_pk' pk=user.pk %}"><h5>{{ friend.get_full_name }}</h5></a>
+                <a href="{% url 'home:update_friend' operation='remove' pk=friend.pk %}"><button type="button" class="btn btn-primary">Remove Friend</button></a>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

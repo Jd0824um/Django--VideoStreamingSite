@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'accounts',
+    'home',
     'localflavor',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -127,12 +128,13 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'YoutubeClone/media')
 MEDIA_URL = '/media/'
 
-# Login URLs
-LOGIN_REDIRECT_URL = '/account/'
+# Static login URLs
+LOGIN_REDIRECT_URL = '/home/'
 LOGIN_URL = '/account/login/'
 LOGIN_EXEMPT_URLS = {
     r'^account/logout/$',
     r'^account/register/$',
+    r'^admin/$',
 }
 
 # Email files

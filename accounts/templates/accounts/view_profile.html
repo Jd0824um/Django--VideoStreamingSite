@@ -12,15 +12,18 @@
 <div class="container">
     <h1> Information: </h1>
     <div class="container">
+        <p>Username: {{ user.username }}</p>
         <p>First Name: {{ user.first_name }} </p>
         <p>Last Name: {{ user.last_name }} </p>
         <p>Email: {{ user.email }} </p>
         <p>Phone Number: {{ user.userprofile.phone }}</p>
-        <p>Description: {{ user.userprofile.description }}</p>
         <p>City: {{ user.userprofile.phone}}</p>
         <p>State: {{ user.userprofile.state }}</p>
+        <p>Description: {{ user.userprofile.description }}</p>
         <p>Member Since: {{ user.userprofile.created_date }}</p>
-        <img src=" {{ user.userprofile.profile_picture.url }}" width="240">
+        {% if user.userprofile.image %}
+            <img src=" {{ user.userprofile.profile_picture.url }}" width="240">
+        {% endif %}
         <br>
         <button type="submit">Edit</button>
     </div>

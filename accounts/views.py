@@ -4,14 +4,9 @@ from accounts.forms import (
     EditProfileForm,
 )
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 
-
-# Views homepage
-def home(request):
-    return render(request, 'accounts/home.html')
 
 # Creates a new user from the register button
 def register(request):
@@ -19,13 +14,18 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/account')
+            return redirect('home:home')
     else:
         form = RegistrationForm()
-        return render(request, 'accounts/registration.html', {'form' : form})
 
-# Shows the user profile
-def view_profile(request):
+    return render(request, 'accounts/registration.html', {'form' : form})
+
+# Shows a user profile
+def view_profile(request, pk=None):
+    if pk:
+        user = User.objects.get(pk=pk)
+    else:
+        user = request.user
     return render(request, 'accounts/view_profile.html', {'user' : request.user})
 
 # Allows editing of the user profile
@@ -34,11 +34,11 @@ def edit_profile(request):
         form = EditProfileForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('/account/profile')
+            return redirect('accounts:view_profile')
 
     else:
         form = EditProfileForm(instance=request.user)
-        return render(request, 'accounts/edit_profile.html', {'form' : form})
+        return render(request, 'accounts:view_profile', {'form' : form})
 
 # Changes password for a user
 def change_password(request):
@@ -47,7 +47,7 @@ def change_password(request):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user) # Keeps user logged when the password has changed
-            return redirect('/account/profile')
+            return redirect('accounts:view_profile')
         else:
             return redirect('/account/change_password') # Loads the same form if the data is invalid
 

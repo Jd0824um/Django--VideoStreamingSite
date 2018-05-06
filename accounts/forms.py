@@ -17,16 +17,16 @@ class RegistrationForm(UserCreationForm):
         'password1',
         'password2')
 
-        def save(self, commit=True):
-            user = super(Registration, self).save(commit=false)
-            user.first_name = self.cleaned_data['first_name'] # Checks for any harmful strings
-            user.last_name = self.cleaned_data['last_name']
-            user.email = self.cleaned_data['email']
+    def save(self, commit=True):
+        user = super(RegistrationForm, self).save(commit=False)
+        user.first_name = self.cleaned_data['first_name'] # Checks for any harmful strings
+        user.last_name = self.cleaned_data['last_name']
+        user.email = self.cleaned_data['email']
 
-            if commit:
-                user.save()
+        if commit:
+            user.save()
 
-            return user
+        return user
 
 class EditProfileForm(UserChangeForm):
 
