@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView
 from django.core.exceptions import ObjectDoesNotExist
-from home.forms import HomeForm
-from home.models import Post, Friend
+from home.models import Friend
+from memes.models import Post
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 
@@ -10,7 +10,6 @@ class HomeView(TemplateView):
     template_name = 'home/home.html'
 
     def get(self, request):
-        form = HomeForm()
         posts = Post.objects.all().order_by('-created')
         users = User.objects.exclude(id=request.user.id)
         try:
@@ -18,21 +17,7 @@ class HomeView(TemplateView):
             friends = friend.users.all()
         except Friend.DoesNotExist:
             friends = None
-        return render(request, self.template_name, {'form' : form, 'posts' : posts, 'users' : users, 'friends': friends})
-
-    def post(self, request):
-        form = HomeForm(request.POST)
-
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.user = request.user
-            post.save()
-
-            text = form.cleaned_data['post']
-            form = HomeForm()
-            return redirect('home:home')
-
-        return render(request, self.template_name, {'form' : form, 'text' : text})
+        return render(request, self.template_name, {'posts' : posts, 'users' : users, 'friends': friends})
 
 def update_friend(request, operation, pk):
     friend = User.objects.get(pk=pk)

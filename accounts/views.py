@@ -6,6 +6,7 @@ from accounts.forms import (
 from django.contrib.auth.models import User
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 # Creates a new user from the register button
@@ -26,7 +27,7 @@ def view_profile(request, pk=None):
         user = User.objects.get(pk=pk)
     else:
         user = request.user
-    return render(request, 'accounts/view_profile.html', {'user' : request.user})
+    return render(request, 'accounts/view_profile.html', {'user' : user})
 
 # Allows editing of the user profile
 def edit_profile(request):
@@ -38,7 +39,7 @@ def edit_profile(request):
 
     else:
         form = EditProfileForm(instance=request.user)
-        return render(request, 'accounts:view_profile', {'form' : form})
+        return render(request, 'accounts/edit_profile.html', {'form' : form})
 
 # Changes password for a user
 def change_password(request):

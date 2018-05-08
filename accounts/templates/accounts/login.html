@@ -5,21 +5,25 @@
 {% endblock %}
 
 {% block body%}
-<div class="jumbotron">
-    <h1>Welcome!</h1>
-    <p>
-        Please login below...
-    </p>
+<div class="container-fluid">
+    <div class="jumbotron">
+        <h1>Welcome!</h1>
+        <p>Please login below...</p>
+    </div>
 </div>
+
 
 <div class="container">
     <h2> Credentials: </h2>
-    <br>
-    <div class="container">
+    <hr>
+    <div class="container-fluid">
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Login</button>
+            <a href="/reset-password" data-toggle="tooltip" data-placement="top" title="click here to reset!">Forgot your password?</a>
+            <hr>
+            <br>
+            <button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Click here to login">Login</button>
         </form>
     </div>
 </div>

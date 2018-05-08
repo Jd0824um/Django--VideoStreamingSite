@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'accounts',
+    'memes',
     'home',
     'localflavor',
     'django.contrib.admin',
@@ -135,6 +136,10 @@ LOGIN_EXEMPT_URLS = {
     r'^account/logout/$',
     r'^account/register/$',
     r'^admin/$',
+    r'^reset-password/$',
+    r'^reset-password/done/$',
+    r'^reset_password/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$'
+    r'^reset_password/complete/$'
 }
 
 # Email files

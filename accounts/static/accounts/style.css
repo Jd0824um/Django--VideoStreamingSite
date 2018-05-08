@@ -1,8 +1,53 @@
 body {
-  }
+    font: 20px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #FFFAFA;
 
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.jumbotron{
+    border: 5px;
+    border-color: #fff;
+    border-style: solid;
+}
+.vertical-center {
+
+
+  text-align: center;  /* align the inline(-block) elements horizontally */
+  font: 0/0 a;         /* remove the gap between inline(-block) elements */
+}
+
+.vertical-center:before {    /* create a full-height inline block pseudo=element */
+  content: " ";
+  display: inline-block;
+  vertical-align: middle;    /* vertical alignment of the inline element */
+}
+
+.vertical-center > .container {
+
+  display: inline-block;
+  vertical-align: middle;  /* vertical alignment of the inline element */
+                           /* reset the font property */
+}
 div.col-md-3 {
-    border-top: 1px solid #87CEEB;
+    border: 5px;
+    border-color: #fff;
+    border-style: solid;
+    background-color: #F5F5F5;
+
     padding-top: 10px;
     float: none;
     margin: 0 auto;
@@ -10,30 +55,31 @@ div.col-md-3 {
 
 }
 
-div.col-md-9 {
+div.col-md-6 {
+    padding-top: 10px;
     float: none;
     margin: 0 auto;
-    border: 1px solid #87CEEB;
-    padding-top: 10px;
-    padding-right: 80px;
-    padding-bottom: 30px;
-    padding-left: 80px;
+    padding-left: 30px;
 }
 
-div.people {
-    width: 70px;
-    display: inline;
-    flex-wrap: wrap;
-    align-content: center;
+.divider-vertical {
+    height: 35px;
+    margin: 0 9px;
+    border-left: 1px solid #F2F2F2;
+    border-right: 1px solid #FFF;
 }
+
 
 .navbar-light {
+    border: 5px;
+    border-color: #fff;
+    border-style: solid;
     background-color: #87CEEB;
-    border-color: #E7E7E7;
     text-shadow: 1px 1px white;
 }
 
 div.post {
+
     border: 1px solid #87CEEB;
     padding-top: 10px;
     padding-right: 10px;

@@ -1,77 +1,85 @@
 {% extends 'base.html' %}
 
 {% block body %}
+{% load staticfiles %}
 <div class="container">
+    <p><div class="jumbotron vertical-center ">
+        <h1>{{ user.get_full_name }}'s Meme Feed</h1>
+    </div></p>
+    <hr>
+    <br>
     <div class="row">
-        <div class="col-md-9">
-            <div class="col-md-12">
-                <br>
-                <div class="jumbotron">
-                    <h1>Your Meme Feed</h1>
-                </div>
-                <div class="post">
-                    <form method="post">
-                        <div class="jumbotron">
-                            <p> <h1>Post a meme...</h1> </p>
-                            <br>
-                        </div>
-                        {% csrf_token %}
-                        <p> {{ form.image }} </p>
-                        <p> {{ form.post}} </p>
-                        <button type="submit">Submit</button>
-                    </form>
-                </div>
-            </div>
-
-            <h2 class="meme_title"> {{ text }} </h2>
-
-            {% for post in posts %}
-
-                <h1>{{ post.post }}</h1>
-                <div class="meme_post">
-                    <div class="card" style="width: 40rem;">
-                        <img class="card-img-top" src=".../100px180/?text=Image cap" alt="Card image cap">
-                        <div class="card-body">
-                        </div>
-                        <div class="card-footer text-muted">
-                            <p> By: {{ post.user.get_full_name }}</p>
-                            <p> Posted on: {{ post.created }}</p>
-                        </div>
-                    </div>
-                </div>
-
-            {% endfor %}
-
-        </div>
         <div class="col-md-3">
-            <div class="col-md-12">
-
-                <br>
-                <div class="jumbotron">
-                    <h1>Memers</h2>
-                </div>
-                {% for user in users %}
-                {% if not user in friends %}
-                <div class="people">
+            <div class="container vertical-center">
+                <h1>Friends</h2>
+                    <hr>
+            </div>
+            <div class="container vertical-center">
+                {% for friend in friends %}
+                {% if not friend.is_superuser %}
+                <div class="friends">
                     <h5>
-                        <a href="{% url 'accounts:view_profile_with_pk' pk=user.pk %}"> {{ user.username }} </a>
-                        <a href="{% url 'home:update_friend' operation='add' pk=user.pk %}"><button type="button" class="btn btn-success">Add Friend</button></a>
+                        <a href="{% url 'accounts:view_profile_with_pk' pk=user.pk %}">{{ friend.first_name }} &nbsp;&nbsp;</a>
+                        <a href="{% url 'home:update_friend' operation='remove' pk=friend.pk %}"><button type="button" class="btn btn-primary btn-sm">Remove Friend</button></a>
                     </h5>
                 </div>
-
+                <hr>
                 {% endif %}
                 {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="container">
 
-                <div class="jumbotron">
-                    <h1>Friends</h2>
-                </div>
-                {% for friend in friends %}
-                <a href="{% url 'accounts:view_profile_with_pk' pk=user.pk %}"><h5>{{ friend.get_full_name }}</h5></a>
-                <a href="{% url 'home:update_friend' operation='remove' pk=friend.pk %}"><button type="button" class="btn btn-primary">Remove Friend</button></a>
+                {% for post in posts %}
+
+                <h2 class="meme_title"> {{ post.text }} </h2>
+                    <div class="container-fluid">
+                        <h1>{{ post.post }}</h1>
+                        <div class="card" style="width: 30rem;">
+                            <img class="card-img-top rounded" src="{{ post.image.url }}" alt="Card image cap">
+                            <div class="card-body">
+                            </div>
+                            <div class="card-footer text-muted">
+                                {% if not post.user in friends %}
+                                <p> By: {{ post.user.username }}</p>
+                                {% else %}
+                                <p> By: {{ post.user.get_full_name }}</p>
+                                {% endif %}
+                                <p> Posted on: {{ post.created }}</p>
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+                        <br>
+                    </div>
 
                 {% endfor %}
             </div>
+        </div>
+        <div class="col-md-3">
+            <div class="container vertical-center">
+                <h1>Memers</h2>
+                    <hr>
+            </div>
+            <div class="container vertical-center">
+                {% for user in users %}
+                {% if not user in friends %}
+                {% if not use.is_superuser %}
+                <div class="people">
+                    <h5>
+                        <a href="{% url 'accounts:view_profile_with_pk' pk=user.pk %}"> {{ user.username }} &nbsp;&nbsp; </a>
+                        <a href="{% url 'home:update_friend' operation='add' pk=user.pk %}"><button type="button" class="btn btn-success btn-sm">Add Friend</button></a>
+                    </h5>
+                </div>
+                <hr>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+            </div>
+
         </div>
     </div>
 </div>
+
 {% endblock %}

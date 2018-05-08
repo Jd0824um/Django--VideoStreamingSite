@@ -4,11 +4,12 @@ from django.db.models.signals import post_save
 from localflavor.us.models import USStateField
 from django.utils import timezone
 
+
 # Creates a user profile
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    description = models.CharField(max_length=150, default='')
-    city = models.CharField(max_length=20, default='')
+    description = models.CharField(max_length=150, blank=True)
+    city = models.CharField(max_length=20, blank=True)
     state = USStateField(null=True, blank=True)
     created_date = models.DateTimeField(default=timezone.now)
     phone = models.IntegerField(default=0)

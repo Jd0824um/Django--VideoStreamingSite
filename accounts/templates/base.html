@@ -14,50 +14,58 @@
         {% endblock %}
     </head>
     <body>
-    <br>
     <!-- Adds a toolbar -->
     <link rel="stylesheet" href="{% static 'accounts/style.css' %}">
-    <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
-        <a href="" class="navbar-brand d-flex w-50 mr-auto">Meme Hosting Network </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
-            {% if user.is_authenticated %} <!-- If user is authenticated, show these buttons -->
-            <ul class="navbar-nav w-100 justify-content-center">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'home:home' %}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'admin:index' %}">Your Memes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:view_profile' %}">Profile</a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-                {% if user.is_superuser %}
-                <li>
-                    <a class="nav-link "href="{% url 'admin:index' %}">Admin</a>
-                </li>
+    <div class="container-fluid">
+        <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
+            <a href="" class="navbar-brand d-flex w-50 mr-auto">Meme Hosting Network </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+                {% if user.is_authenticated %} <!-- If user is authenticated, show these buttons -->
+                <ul class="navbar-nav w-100 justify-content-center">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'home:home' %}">Home</a>
+                        <li class="divider-vertical"></li>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'meme:meme' %}">Your Memes</a>
+                        <li class="divider-vertical"></li>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'accounts:view_profile' %}">Profile</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+                    {% if user.is_superuser %}
+                    <li>
+                        <a class="nav-link active"href="{% url 'admin:index' %}">Admin</a>
+                        <li class="divider-vertical"></li>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+                    </li>
+                </ul>
+                {% else %} <!-- else show these buttons -->
+                <ul class="navbar-nav w-100 justify-content-center">
+                <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'accounts:login' %}">Login</a>
+                        <li class="divider-vertical"></li>
+                    </li>
+                    <li class="nav-item">
+
+                        <a class="nav-link active" href="{% url 'accounts:register' %}">Register</a>
+                    </li>
+                </ul>
                 {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
-                </li>
-            </ul>
-            {% else %} <!-- else show these buttons -->
-            <ul class="navbar-nav w-100 justify-content-center">
-            <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:register' %}">Register</a>
-                </li>
-            </ul>
-            {% endif %}
-        </div>
-    </nav>
+            </div>
+        </nav>
+    </div>
+
+    <br>
     {% block body %}
     {% endblock %}
     </body>
