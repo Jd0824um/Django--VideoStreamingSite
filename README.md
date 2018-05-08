@@ -13,7 +13,7 @@
 #6.) Start server from root directory of project - python manage.py runserver  
 #7.) Navigate to 127.0.0.1  
 #8.) Create a user and login. Share some of your favorite memes!
-![alt text](YoutubeClone/media/media/img3.PNG)
+#  
 ![alt text](YoutubeClone/media/media/img1.PNG)
 
 
@@ -27,7 +27,7 @@
 #bootstrap = markup  
 
 # Contributing
-#Please read CONTRIBUTING.md for details on our code of conduct, and the process for submitting pull #requests to us.
+#Please read CONTRIBUTING.md for details on our code of conduct, and the process for submitting pull   #requests to us.
 
 # Authors
 #John Zika -- initial work  
